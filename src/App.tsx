@@ -1,20 +1,21 @@
 import './App.css'
 import { useState } from 'react'
 import InputField from './components/InputField'
-import Checklist from './components/checklist'
+import DayList from './components/DayList'
 
 function App() {
 
-  const [items, setItems] = useState<string[]>([])
+  const [days, setDays] = useState<string[]>([])
 
-  const addItem = (newItem: string) => {
-    setItems([newItem, ...items])
+  const addDay = (newDay: string) => {
+    setDays([newDay, ...days])
   }
 
   return (
     <>
-      <InputField addItem={addItem}/>
-      <Checklist items={items}/>
+      <h2>Daily Tracker</h2>
+      <InputField addDay={addDay}/>
+      <DayList days={days}/>
     </>
   )
 }

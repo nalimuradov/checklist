@@ -1,20 +1,21 @@
-export default function Checklist({items}: {items:string[]}) {
+import DayItem from "./DayItem"
+
+export default function DayList({days}: {days:string[]}) {
 
     return (
         <div>
-            {items.length === 0 ? (
+            {days.length === 0 ? (
                 <p></p>
             ) : (
                 <table>
                     <thead>
-                        <tr>
-                            <th>Items</th>
-                        </tr>
                     </thead>
                     <tbody>
-                        {items.map((item, index) => (
+                        {days.map((day, index) => (
                             <tr key={index}>
-                                <td>{item}</td>
+                                <td>
+                                    <DayItem day={day} />
+                                </td>
                             </tr>
                         ))}
                     </tbody>

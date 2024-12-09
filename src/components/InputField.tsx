@@ -1,7 +1,8 @@
 import { useState } from 'react'
+import Button from '@mui/material/Button';
 
 
-export default function InputField({addItem} : {addItem: (value:string) => void}) {
+export default function InputField({addDay} : {addDay: (value:string) => void}) {
 
     const [inputValue, setInputValue] = useState<string>("")
 
@@ -9,14 +10,15 @@ export default function InputField({addItem} : {addItem: (value:string) => void}
         setInputValue(event.target.value)
       }
 
-    const handleClick = (item: string) => {
-        addItem(inputValue)
+    const handleClick = () => {
+        addDay(inputValue)
     }
 
     return (
         <>
         <input value={inputValue} onChange={updateInputValue}></input>
-        <button onClick={() => handleClick(inputValue)}>Add Item</button>
+        <button onClick={() => handleClick()}>Add Day</button>
+        <Button variant="outlined">Hello</Button>
         </>
     )
 }
