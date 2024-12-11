@@ -1,6 +1,7 @@
-import DayItem from "./DayItem"
+import Day from "./Day"
+import { useState } from 'react'
 
-export default function DayList({days}: {days:string[]}) {
+export default function DayList({days}: {days:Date[]}) {
 
     return (
         <div>
@@ -14,7 +15,7 @@ export default function DayList({days}: {days:string[]}) {
                         {days.map((day, index) => (
                             <tr key={index}>
                                 <td>
-                                    <DayItem day={day} />
+                                    <Day day={day} />
                                 </td>
                             </tr>
                         ))}
