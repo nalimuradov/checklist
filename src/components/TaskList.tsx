@@ -5,7 +5,7 @@ export default function TaskList({tasks}: {tasks:typeof Task[]}){
     return (
         <>
             {tasks.map((task, index) => (
-                <Task></Task>
+                <Task name="{index}"></Task>
             ))}
         </>
         

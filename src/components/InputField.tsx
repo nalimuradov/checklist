@@ -14,7 +14,7 @@ export default function InputField({addDay} : {addDay: (value:Date) => void}) {
             addDay(inputValue)
         }
     }
-
+    
     return (
         <div className='input-field'>
             <LocalizationProvider dateAdapter={AdapterMoment}>

@@ -1,10 +1,10 @@
 import TextField from '@mui/material/TextField'
 import { useState } from 'react'
 
-export default function Task() {
+export default function Task({name}:{name:string}) {
 
-    const [key, setKey] = useState<string>()
-    const [value, setValue] = useState()
+    const [key, setKey] = useState<string>("")
+    const [value, setValue] = useState("")
 
     return (
         <>

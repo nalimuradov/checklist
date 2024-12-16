@@ -11,6 +11,10 @@ export default function Day({day}:{day:Date}){
 
     const [tasks, setTasks] = useState<typeof Task[]>([])
 
+    function AddTask(id:number) {
+        return <div>Task #{id}</div>
+    }
+
     return (
         <>
         <Accordion className='day-item' slotProps={{ heading: {component: 'h4'}}}>
@@ -26,7 +30,6 @@ export default function Day({day}:{day:Date}){
                 </tbody>
             </table>
             <Button 
-                //onClick={() => setTasks([...tasks, Task()])}
                 >Add Task</Button>
             </AccordionDetails>
         </Accordion>

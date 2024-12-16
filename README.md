@@ -1,50 +1,36 @@
-# React + TypeScript + Vite
+useEffect
+ - fetching data or external services
+ - allows us to perform tasks after the component has already been added to the DOM or if a state/prop is changed
+    - eg. [] runs once on mount, [state] runs whenever state changes
+ - USAGE: fetch default values from text file on button press
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+suspense/lazy
+ - lazy lets us load component only when it's rendered, not before
+ - if we want to wait for item to load, we can use <Suspense> tag
+ - USAGE: add loading screen to only home page, lazy load all components I make
 
-Currently, two official plugins are available:
+memo
+ - const MyComponent = memo(SomeComponent, arePropsEqual?)
+ - let's us skip re-rendering components if props are unchanged for that component
+ - otherwise, components will re-render if their parent re-renders
+ - USAGE: memo load all components I make, also try useCallback() for performance
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+context
+ - props are like parameters we pass through components
+ - what if we wanted to pass a prop many layers down
+ - that component can then use the context: const theme = useContext(themeContext)
+ - USAGE: add light/dark mode so that the prop is passed to all child components
 
-## Expanding the ESLint configuration
+useActionState
+ - hook that updates when form submitted
+ - USAGE: add login form at header, routes you to other page, then returns back to original page with name at top right
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+cache:
+ - USAGE: save added dates through reloads
 
-- Configure the top-level `parserOptions` property like this:
+react profiler:
+ - dev tools, analyze performance
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+more todo:
+ - conditionally show/hide components (show hide header)
+ - testing with jest/storybook
