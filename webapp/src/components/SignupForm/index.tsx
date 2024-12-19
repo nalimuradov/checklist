@@ -10,14 +10,14 @@ export default function SignupForm(){
     const [username, setUsername] = useState<string>("")
     const [password, setPassword] = useState<string>("")
 
-    const { isLoggedIn, login } = useAuth()
+    const { login } = useAuth()
 
     const registerAccount = async () => {
 
         const newAccount = { username, password }
 
         try {
-            const response = await fetch("accounts.json", {
+            await fetch("accounts.json", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
