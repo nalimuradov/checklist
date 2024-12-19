@@ -1,5 +1,5 @@
 useEffect
- - fetching data or external services
+ - fetching data or external services (handle success, failure, error)
  - allows us to perform tasks after the component has already been added to the DOM or if a state/prop is changed
     - eg. [] runs once on mount, [state] runs whenever state changes
  - USAGE: fetch default values from text file on button press
@@ -19,6 +19,7 @@ context
  - props are like parameters we pass through components
  - what if we wanted to pass a prop many layers down
  - that component can then use the context: const theme = useContext(themeContext)
+ - jotai for contextless context
  - USAGE: add light/dark mode so that the prop is passed to all child components
 
 useActionState
@@ -28,9 +29,17 @@ useActionState
 cache:
  - USAGE: save added dates through reloads
 
+testing:
+ - storybook, jest
+
 react profiler:
  - dev tools, analyze performance
 
 more todo:
  - conditionally show/hide components (show hide header)
  - testing with jest/storybook
+ - props figure out everything
+
+ORDER OF THINGS TO DO:
+ 1) Complete login module (useActionState?)
+ 2) 

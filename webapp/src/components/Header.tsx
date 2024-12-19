@@ -5,15 +5,11 @@ import { useAuth } from "../hooks/AuthContext"
 export default function Header(){
 
     const navigate = useNavigate()
-    const { logout, username } = useAuth()
-
-    const navigateLogin = () => {
-        navigate('/login')
-    }
+    const { logout } = useAuth()
 
     const navigateLogout = () => { 
         logout()
-        navigate('/')
+        navigate('/login')
     }
 
     const { isLoggedIn } = useAuth()
@@ -23,18 +19,30 @@ export default function Header(){
         <Box sx={{ flexGrow: 1 }}>
         <AppBar position="fixed">
             <Toolbar>
+                <Button color="inherit"
+                    onClick={() => navigate('/')}>
+                    Home
+                    </Button>
                 {!isLoggedIn ? (
+                    <>
                     <Button color="inherit"
-                    onClick={navigateLogin}>
+                    sx={{marginLeft:0}}
+                    onClick={() => navigate('/signup')}>
+                    Sign Up
+                    </Button>
+                    <Button color="inherit"
+                    sx={{marginLeft:"auto"}}
+                    onClick={() => navigate('/login')}>
                     Login
                     </Button>
+                    </>
                 ): (
                     <>
                     <Button color="inherit"
+                    sx={{marginLeft:"auto"}}
                     onClick={navigateLogout}>
                     Logout
                     </Button>
-                    ({username})
                     </>
                 )}
                 

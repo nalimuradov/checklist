@@ -1,5 +1,4 @@
 import Day from "./Day"
-import { useState } from 'react'
 
 export default function DayList({days}: {days:Date[]}) {
 
