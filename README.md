@@ -41,5 +41,6 @@ more todo:
  - props figure out everything
 
 ORDER OF THINGS TO DO:
- 1) Complete login module (useActionState?)
- 2) 
+ 1) Restructure folder architecture
+ 2) Complete login/signup service (auth backend tool)
+ 3) Simplify scope of project (only tracking one thing?)
