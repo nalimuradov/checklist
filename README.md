@@ -22,25 +22,14 @@ context
  - jotai for contextless context
  - USAGE: add light/dark mode so that the prop is passed to all child components
 
-useActionState
- - hook that updates when form submitted
- - USAGE: add login form at header, routes you to other page, then returns back to original page with name at top right
-
-cache:
- - USAGE: save added dates through reloads
-
 testing:
  - storybook, jest
 
 react profiler:
  - dev tools, analyze performance
 
-more todo:
- - conditionally show/hide components (show hide header)
- - testing with jest/storybook
- - props figure out everything
-
-ORDER OF THINGS TO DO MONDAY:
- 1) Restructure folder architecture [DONE IG]
- 2) Complete login/signup service (auth backend tool)
- 3) Simplify scope of project (only tracking one thing?)
+NEXT TO DO (DEC 24):
+ 1) Connect to DB and store data per account so can access on login (cache?)
+ 2) Simplify scope of project
+      - instead show monthly/yearly calendar and clicking on day opens component on side with key/values
+ 3) Conditionally show/hide those components
