@@ -1,25 +1,32 @@
 import { AppBar, Toolbar, Button, Box } from "@mui/material"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../hooks/AuthContext"
+import { useEffect } from "react"
 
 export default function Header(){
 
     const navigate = useNavigate()
-    const { isLoggedIn, setLoginStatus } = useAuth()
+    const { loginToken, setToken } = useAuth()
 
     const navigateLogout = () => { 
-        setLoginStatus(false)
+        setToken("")
         localStorage.removeItem('authToken')
         navigate('/login')
     }
+
+    useEffect(() => {
+        const token = localStorage.getItem('authToken')
+        if (token){
+            setToken(token)
+        }
+    }, [])
 
     return (
 
         <Box sx={{ flexGrow: 1 }}>
         <AppBar position="fixed">
             <Toolbar>
-
-                {!isLoggedIn ? (
+                {!loginToken ? (
                     <Button color="inherit"
                     sx={{marginLeft:0}}
                     onClick={() => navigate('/signup')}>
@@ -32,7 +39,7 @@ export default function Header(){
                     </Button>
                 )}
                 
-                {!isLoggedIn ? (
+                {!loginToken ? (
                     <Button color="inherit"
                     sx={{marginLeft:"auto"}}
                     onClick={() => navigate('/login')}>

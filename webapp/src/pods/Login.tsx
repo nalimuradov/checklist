@@ -12,15 +12,13 @@ export default function LoginForm(){
     const [username, setUsername] = useState<string>("")
     const [password, setPassword] = useState<string>("")
 
-    const { setLoginStatus } = useAuth()
+    const { setToken } = useAuth()
 
     const handleLogin = async () => {
         
         try {
             const data = await login(username, password)
-            setLoginStatus(true)
-            localStorage.setItem('authToken', data.token)
-            console.log("You are now logged in")
+            setToken(data.token)
             navigate('/')
         } catch (error) {
             console.log(error)

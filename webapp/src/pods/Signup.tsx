@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { useAuth } from "../hooks/AuthContext"
 import { TextField, Button } from "@mui/material"
 import { useState } from "react"
-import { register } from "../utils/api"
+import { register, login } from "../utils/api"
 
 export default function SignupForm(){
 
@@ -12,18 +12,19 @@ export default function SignupForm(){
     const [username, setUsername] = useState<string>("")
     const [password, setPassword] = useState<string>("")
 
-    const { setLoginStatus } = useAuth()
+    const { setToken } = useAuth()
 
     const registerAccount = async () => {
 
         try {
             await register(username, password)
-            setLoginStatus(true)
-            console.log("Account registered")
+            const data = await login(username, password)
+            setToken(data.token)
+            navigate('/')
         } catch (error) {
-            console.log("Error while creating account")
+            console.log(error)
         }
-        navigate('/')
+        
     }
 
     return (

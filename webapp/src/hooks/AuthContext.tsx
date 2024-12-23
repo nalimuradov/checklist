@@ -2,8 +2,8 @@ import { createContext, useState, useContext, ReactNode } from "react";
 
 // holds state of login
 const AuthContext = createContext({
-    isLoggedIn: false,
-    setLoginStatus: (status:boolean) => {}
+    loginToken: localStorage.getItem('authToken'),
+    setToken: (token:string) => {}
 })
 
 interface AuthProps {
@@ -18,14 +18,15 @@ export const useAuth = () => {
 // wraps app to provide context to all components
 export const AuthProvider = ({children}:AuthProps) => {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [loginToken, setLoginToken] = useState("")
 
-    const setLoginStatus = (status:boolean) => {
-        setIsLoggedIn(status)
+    const setToken = (token:string) => {
+        localStorage.setItem("authToken", token)
+        setLoginToken(token)
     }
 
     return (
-        <AuthContext.Provider value={{isLoggedIn, setLoginStatus}}>
+        <AuthContext.Provider value={{loginToken, setToken}}>
             {children}
         </AuthContext.Provider>
     )
