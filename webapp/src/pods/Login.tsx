@@ -1,24 +1,61 @@
 import Header from "../components/Header"
-import LoginForm from "../components/LoginForm"
-import { useAuth } from "../hooks/AuthContext"
+import { FormControl } from "@mui/material"
 import { useNavigate } from "react-router-dom"
-import { useEffect } from "react"
+import { useAuth } from "../hooks/AuthContext"
+import { TextField, Button } from "@mui/material"
+import { useState } from "react"
+import { login } from "../utils/api";
 
-export default function Login() {
+export default function LoginForm(){
 
     const navigate = useNavigate()
-    const { isLoggedIn } = useAuth()
+    const [username, setUsername] = useState<string>("")
+    const [password, setPassword] = useState<string>("")
 
-    useEffect(() => {
-        if (isLoggedIn) {
-            navigate("/")
+    const { setLoginStatus } = useAuth()
+
+    const handleLogin = async () => {
+        
+        try {
+            const data = await login(username, password)
+            setLoginStatus(true)
+            localStorage.setItem('authToken', data.token)
+            console.log("You are now logged in")
+            navigate('/')
+        } catch (error) {
+            console.log(error)
         }
-    }, [isLoggedIn, navigate])
+    }
 
     return (
         <>
-        <Header/>
-            {!isLoggedIn ? <LoginForm/> : null}
+        <Header />
+        <FormControl>
+            <h2>Login</h2>
+            <TextField 
+                className="text-field"
+                id="outlined-required-username"
+                variant="outlined"
+                label="Username"
+                onChange={(e) => setUsername(e.target.value)}
+                sx={{marginBottom:2}}>
+            </TextField>
+            <TextField 
+                className="text-field"
+                id="outlined-required-password"
+                variant="outlined"
+                type="password"
+                label="Password"
+                onChange={(e) => setPassword(e.target.value)}
+                sx={{marginBottom:2}}>
+            </TextField>
+            <Button 
+                className="button-input"
+                variant="outlined"
+                onClick={handleLogin}
+                >Login
+            </Button>
+        </FormControl>
         </>
     )
 }

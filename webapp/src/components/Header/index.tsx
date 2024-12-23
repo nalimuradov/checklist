@@ -1,41 +1,43 @@
 import { AppBar, Toolbar, Button, Box } from "@mui/material"
 import { useNavigate } from "react-router-dom"
-import { useAuth } from "../hooks/AuthContext"
+import { useAuth } from "../../hooks/AuthContext"
 
 export default function Header(){
 
     const navigate = useNavigate()
-    const { logout } = useAuth()
+    const { isLoggedIn, setLoginStatus } = useAuth()
 
     const navigateLogout = () => { 
-        logout()
+        setLoginStatus(false)
+        localStorage.removeItem('authToken')
         navigate('/login')
     }
-
-    const { isLoggedIn } = useAuth()
 
     return (
 
         <Box sx={{ flexGrow: 1 }}>
         <AppBar position="fixed">
             <Toolbar>
-                <Button color="inherit"
-                    onClick={() => navigate('/')}>
-                    Home
-                    </Button>
+
                 {!isLoggedIn ? (
-                    <>
                     <Button color="inherit"
                     sx={{marginLeft:0}}
                     onClick={() => navigate('/signup')}>
                     Sign Up
                     </Button>
+                ): (
+                    <Button color="inherit"
+                    onClick={() => navigate('/dashboard')}>
+                    Home
+                    </Button>
+                )}
+                
+                {!isLoggedIn ? (
                     <Button color="inherit"
                     sx={{marginLeft:"auto"}}
                     onClick={() => navigate('/login')}>
                     Login
                     </Button>
-                    </>
                 ): (
                     <>
                     <Button color="inherit"

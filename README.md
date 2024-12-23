@@ -40,7 +40,7 @@ more todo:
  - testing with jest/storybook
  - props figure out everything
 
-ORDER OF THINGS TO DO:
- 1) Restructure folder architecture
+ORDER OF THINGS TO DO MONDAY:
+ 1) Restructure folder architecture [DONE IG]
  2) Complete login/signup service (auth backend tool)
  3) Simplify scope of project (only tracking one thing?)
