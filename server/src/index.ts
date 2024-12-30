@@ -1,7 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import dotenv from 'dotenv'
-import authRoutes from './routes/auth'
+import authRoutes from './auth'
 import cors from 'cors'
 import path from 'path'
 
