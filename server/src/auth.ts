@@ -1,10 +1,11 @@
 import express from 'express'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import fs from 'fs'
 import path from 'path'
 
 const router = express.Router()
+const pool = require('../db')
 
 interface User {
     username: string
@@ -14,13 +15,10 @@ interface User {
 router.post('/login', async (req, res) => {
     const { username, password } = req.body
 
-    const response = await fetch('http://localhost:5000/public/accounts.json')
-    const registeredAccounts:User[] = await response.json()
+    const user = await pool.query('SELECT * FROM accounts WHERE username = $1', [username])
 
-    const user = registeredAccounts.find(u => u.username === username)
-
-    if (!user) {
-        res.status(401).send({message: "Invalid username"})
+    if (user.rows.length > 0) {
+        res.status(400).json({ message: 'Username already exists' })
         return
     }
 
@@ -37,6 +35,8 @@ router.post('/login', async (req, res) => {
 
 router.post('/register', async (req, res) => {
 
+    console.log('REGISTERING')
+
     const { username, password } = req.body
 
     if (!username || !password) {
@@ -45,21 +45,16 @@ router.post('/register', async (req, res) => {
     }
 
     try {
-        const userData = fs.readFileSync(path.resolve('../server/public/accounts.json'), 'utf-8')
-        const users:User[] = await JSON.parse(userData)
+        const userData = await pool.query('SELECT * FROM accounts WHERE username = $1', [username])
 
-        const existingUser = users.find((user:User) => user.username === username)
-
-        if (existingUser) {
+        if (userData.rows.length > 0) {
             res.status(400).json({ message: 'Username already exists' })
             return
         }
 
         const hashPassword = await bcrypt.hash(password, 10)
-        const newUser = { username, password: hashPassword}
-        users.push(newUser)
 
-        fs.writeFileSync(path.resolve('../server/public/accounts.json'), JSON.stringify(users, null, 2))
+        await pool.query(`INSERT INTO accounts (username, password) VALUES ($1, $2)`, [username, hashPassword])
         res.status(201).json({ message: 'User created successfully'})
 
     } catch (error) {

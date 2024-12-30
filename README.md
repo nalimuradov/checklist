@@ -28,7 +28,7 @@ testing:
 react profiler:
  - dev tools, analyze performance
 
-NEXT TO DO (DEC 24):
+NEXT TO DO (DEC 30):
  1) Connect to DB and store data per account so can access on login (cache?)
  2) Simplify scope of project
       - instead show monthly/yearly calendar and clicking on day opens component on side with key/values
